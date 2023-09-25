@@ -20,7 +20,9 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''   $SonarHome/bin/sonar-scanner -Dsonar.projectName=myTestProject \
-                        -Dsonar.projectKey=myTestProject -X '''
+                        -Dsonar.projectKey=myTestProject \
+                        -Dsonar.exclusions=**/*.java \
+                        -X '''
                 }
                
             }
