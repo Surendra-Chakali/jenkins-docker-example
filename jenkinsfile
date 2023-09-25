@@ -18,7 +18,7 @@ pipeline {
 
          stage('Statis code analysis') {
             steps {
-               sh '''   $SonarHome/bin/sonarqb -Dsonar.projectName=myTestProject \
+               sh '''   $SonarHome/bin/sonar-scanner -Dsonar.projectName=myTestProject \
                         -Dsonar.projectKey=myTestProject '''
             }
         }
