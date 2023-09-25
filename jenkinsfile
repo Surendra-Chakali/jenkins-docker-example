@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    environment{
+        Sonar-Home= tool 'sonar'
+    }
     stages {
         stage('Code-Compile') {
             steps {
@@ -11,6 +13,13 @@ pipeline {
         stage('Code-Build') {
             steps {
                sh "mvn clean install"
+            }
+        }
+
+         stage('Statis code analysis') {
+            steps {
+               sh '''   $Sonar-Home/bin/sonar -Dsonar.projectName=myTestProject \
+                        -Dsonar.projectKey=myOwn '''
             }
         }
         
