@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment{
-        SonarHome= tool 'sonar'
+        SonarHome= tool 'sonarqb'
     }
     stages {
         stage('Code-Compile') {
@@ -18,8 +18,8 @@ pipeline {
 
          stage('Statis code analysis') {
             steps {
-               sh '''   $SonarHome/bin/sonar -Dsonar.projectName=myTestProject \
-                        -Dsonar.projectKey=myOwn '''
+               sh '''   $SonarHome/bin/sonarqb -Dsonar.projectName=myTestProject \
+                        -Dsonar.projectKey=myTestProject '''
             }
         }
         
