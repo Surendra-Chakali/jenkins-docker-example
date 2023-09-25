@@ -1,0 +1,31 @@
+pipeline {
+    agent {
+        label 'slave1'
+    }
+    tools{
+        maven 'maven1'
+        dockerTool 'docker1'
+    }
+
+    stages {
+        stage('Maven initialization') {
+            steps {
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/Surendra-Chakali/jenkins-docker-example.git'
+                //sh 'mvn clean package'
+            }
+        }
+        
+        stage('Code-Compile') {
+            steps {
+               sh "mvn clean compile"
+            }
+        }
+        
+        stage('Code-Build') {
+            steps {
+               sh "mvn clean install"
+            }
+        }
+        
+    }
+}
