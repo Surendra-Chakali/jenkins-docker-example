@@ -18,7 +18,7 @@ pipeline {
 
          stage('Statis code analysis') {
             steps {
-                withSonarQubeEnv(credentialsId: 'sonarcreds') {
+                withSonarQubeEnv('SonarQube') {
                     sh '''   $SonarHome/bin/sonar-scanner -Dsonar.projectName=myTestProject \
                         -Dsonar.projectKey=myTestProject '''
                 }
