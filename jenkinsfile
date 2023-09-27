@@ -19,10 +19,8 @@ pipeline {
          stage('Statis code analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh '''   $SonarHome/bin/sonar-scanner -Dsonar.projectName=myTestProject \
-                        -Dsonar.projectKey=myTestProject \
-                        -Dsonar.exclusions=**/*.java \
-                        -X '''
+                    sh ''' $SonarHome/bin/sonar-scanner -Dsonar.projectName=myTestProject \
+                        -Dsonar.projectKey=myTestProject '''
                 }
                
             }
