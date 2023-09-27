@@ -19,8 +19,8 @@ pipeline {
          stage('Statis code analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh ''' $SonarHome/bin/sonar-scanner -Dsonar.projectName=myTestProject \
-                        -Dsonar.projectKey=myTestProject '''
+                    sh ''' $SonarHome/bin/sonar-scanner -Dsonar.projectName=Jenkins Docker \
+                        -Dsonar.projectKey=Jenkins Docker '''
                 }
                
             }
