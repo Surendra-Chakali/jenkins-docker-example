@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    environment{
-        SonarHome= tool 'sonarqb'
-    }
+   
     stages {
         stage('Code-Compile') {
             steps {
@@ -13,16 +11,6 @@ pipeline {
         stage('Code-Build') {
             steps {
                sh "mvn clean install"
-            }
-        }
-
-         stage('Statis code analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh ''' $SonarHome/bin/sonar-scanner -Dsonar.projectName=Jenkins-Docker \
-                        -Dsonar.projectKey=Jenkins-Docker '''
-                }
-               
             }
         }
 
