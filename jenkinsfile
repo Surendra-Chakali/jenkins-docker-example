@@ -1,6 +1,8 @@
 pipeline {
     agent any
-   
+    tools{
+        maven 'mavel1'
+    }
     stages {
         stage('Code-Compile') {
             steps {
