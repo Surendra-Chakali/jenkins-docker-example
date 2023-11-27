@@ -17,7 +17,7 @@ pipeline {
 
         stage('Push to Docker'){
             environment{
-                IMG = "surendra548/sampleJenkins:${BUILD_NUMBER}"
+                IMG = "surendra548/jenkinscicd:${BUILD_NUMBER}"
             }
             steps{
                 script{
