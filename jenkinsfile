@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        maven 'maven1'
+        maven 'maven'
     }
     stages {
         stage('Code-Compile') {
@@ -9,16 +9,23 @@ pipeline {
                sh "mvn clean compile"
             }
         }
-        //Webhook test
         stage('Code-Build') {
             steps {
-               sh "mvn clean install"
+               sh "mvn clean package"
             }
         }
 
-        stage('Deploy to Docker'){
+        stage('Push to Docker'){
+            environment{
+                IMG = "surendra548/sampleJenkins:${BUILD_NUMBER}"
+            }
             steps{
-                sh  ' docker build -t sampleproject:${BUILD_NUMBER} . '
+                script{
+                    withDockerRegistry(credentialsId: 'dockerCreds'){
+                        sh 'docker build -t ${IMG} .'
+                        sh 'docker push ${IMG}'
+                    }
+                }
             }
         }
         
