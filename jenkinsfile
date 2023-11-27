@@ -12,7 +12,9 @@ pipeline {
         }
 
         stage('Build Image') {
-            sh 'docker build -t sample:latest .'
+            steps {
+                sh 'docker build -t sample:latest .'
+            }
         }
 
         stage('Push to Docker') {
