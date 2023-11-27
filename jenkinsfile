@@ -4,26 +4,22 @@ pipeline {
         maven 'maven'
     }
     stages {
-        stage('Code-Compile') {
-            steps {
-               sh "mvn clean compile"
-            }
-        }
+
         stage('Code-Build') {
             steps {
                sh "mvn clean package"
             }
         }
 
-        stage('Push to Docker'){
-            environment{
-                IMG = "surendra548/jenkinscicd:${BUILD_NUMBER}"
+        stage('Push to Docker') {
+            environment {
+                DOCKER_IMG = "surendra548/jenkinscicd:${BUILD_NUMBER}"
             }
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'dockerCreds'){
-                        sh 'docker build -t ${IMG} .'
-                        sh 'docker push ${IMG}'
+                        sh 'docker build -t ${DOCKER_IMG} .'
+                        sh 'docker push ${DOCKER_IMG}'
                     }
                 }
             }
