@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools{
-        maven 'maven'
+        maven 'maven1'
     }
     stages {
 
@@ -9,6 +9,10 @@ pipeline {
             steps {
                sh "mvn clean package"
             }
+        }
+
+        stage('Build Image') {
+            sh 'docker build -t sample:latest .'
         }
 
         stage('Push to Docker') {
